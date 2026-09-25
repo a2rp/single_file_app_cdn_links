@@ -58,22 +58,26 @@
         .footer-links a:hover { color: var(--text); border-color: var(--accent); box-shadow: 0 0 15px rgba(103, 214, 186, .16); }
         @media (max-width: 700px) { .header-note { display: none; } .hero { grid-template-columns: 1fr; } .status-card { max-width: 360px; } .card.wide { grid-template-columns: 1fr; } }
         @media (max-width: 500px) { .main, .footer { width: min(100% - 28px, 960px); } .main { padding-top: 112px; } .content-grid { grid-template-columns: 1fr; } .card.wide { grid-column: auto; } .footer { align-items: flex-start; flex-direction: column; } .footer-links { justify-content: flex-start; } }
-    </style>
+        .goTop { position: fixed; right: 22px; bottom: 22px; z-index: 20; width: 42px; height: 42px; display: grid; place-items: center; color: var(--text); background: rgba(13, 29, 50, .95); border: 1px solid var(--border); border-radius: 50%; box-shadow: 0 10px 26px rgba(0, 0, 0, .24); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .18s ease, visibility .18s ease, border-color .18s ease, box-shadow .18s ease, text-shadow .18s ease; }
+        .goTop.visible { opacity: 1; visibility: visible; pointer-events: auto; }
+        .goTop:hover { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 18px rgba(103, 214, 186, .2); text-shadow: 0 0 9px rgba(103, 214, 186, .7); }
+        @media (max-width: 500px) { .goTop { right: 16px; bottom: 16px; } }    </style>
 </head>
 <body>
 <div id="root"></div>
 <script type="text/babel">
     const connectLinks = [
-        ["Portfolio", "https://www.ashishranjan.net/", "↗"],
-        ["GitHub", "https://github.com/a2rp", "GH"],
-        ["CodePen", "https://codepen.io/ash1198", "CP"],
+        ["Portfolio", "https://www.ashishranjan.net/", String.fromCharCode(0x25c9)],
+        ["GitHub", "https://github.com/a2rp", String.fromCharCode(0x25cf)],
+        ["CodePen", "https://codepen.io/ash1198", "</>"],
         ["LinkedIn", "https://www.linkedin.com/in/aashishranjan", "in"],
         ["Facebook", "https://www.facebook.com/theash.ashish/", "f"],
-        ["YouTube", "https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1", "▶"],
+        ["YouTube", "https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1", String.fromCharCode(0x25b6)],
+        ["Email", "mailto:ash.ranjan09@gmail.com", "@"],
     ];
     const supportLinks = [
-        ["Support", "https://a2rp-donation-page.netlify.app/", "♥"],
-        ["Buy Me a Coffee", "https://buymeacoffee.com/a2rp", "☕"],
+        ["Support", "https://a2rp-donation-page.netlify.app/", String.fromCharCode(0x2665)],
+        ["Buy Me a Coffee", "https://buymeacoffee.com/a2rp", String.fromCharCode(0x2615)],
         ["Patreon", "https://patreon.com/a2rp", "P"],
     ];
 
@@ -82,6 +86,13 @@
     }
 
     function FirstApp() {
+        const [showTop, setShowTop] = React.useState(false);
+        React.useEffect(() => {
+            const updateTopButton = () => setShowTop(window.scrollY > 420);
+            window.addEventListener("scroll", updateTopButton, { passive: true });
+            updateTopButton();
+            return () => window.removeEventListener("scroll", updateTopButton);
+        }, []);
         return <div className="page">
             <header className="header">
                 <a className="brand" href="#top" aria-label="React CDN demo home"><img src="./public/logo.png" alt="" /><span><small>A2RP LAB</small>React CDN Demo</span></a>
@@ -99,6 +110,7 @@
                 </section>
             </main>
             <footer className="footer"><div className="footer-copy"><strong>Simple frontend experiments.</strong><span>Copyright &copy; {new Date().getFullYear()} <a href="https://www.ashishranjan.net/" target="_blank" rel="noopener noreferrer">Ashish Ranjan</a></span></div><div><FooterLinks links={connectLinks} /><FooterLinks links={supportLinks} /></div></footer>
+            <button className={showTop ? "goTop visible" : "goTop"} type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Scroll to top" title="Scroll to top">{"\u2191"}</button>
         </div>;
     }
 
