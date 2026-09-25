@@ -8,7 +8,7 @@ A small React presentation that runs from one HTML file. React, ReactDOM, and Ba
 
 - Single-file HTML, CSS, and JSX setup
 - React 18 loaded from CDN links
-- Responsive branded header and icon-only footer
+- Responsive fixed branded header, icon-only footer, and floating scroll-to-top control
 - Accessible external links and dynamic copyright year
 
 ## Tech stack
