@@ -13,9 +13,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="./public/favicon.ico">
     <title>React CDN Single-File Demo</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script defer crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script defer crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
         :root { color-scheme: dark; --bg: #07111f; --surface: #0d1d32; --surface-soft: #102541; --text: #edf5ff; --muted: #9db0c5; --border: #28415f; --accent: #67d6ba; --blue: #79b9ff; }
         * { box-sizing: border-box; }
@@ -58,13 +58,14 @@
         .footer-links a:hover { color: var(--text); border-color: var(--accent); box-shadow: 0 0 15px rgba(103, 214, 186, .16); }
         @media (max-width: 700px) { .header-note { display: none; } .hero { grid-template-columns: 1fr; } .status-card { max-width: 360px; } .card.wide { grid-template-columns: 1fr; } }
         @media (max-width: 500px) { .main, .footer { width: min(100% - 28px, 960px); } .main { padding-top: 112px; } .content-grid { grid-template-columns: 1fr; } .card.wide { grid-column: auto; } .footer { align-items: flex-start; flex-direction: column; } .footer-links { justify-content: flex-start; } }
+        .cdn-fallback { width: min(100% - 36px, 960px); margin: 140px auto 40px; color: var(--muted); line-height: 1.6; }
         .goTop { position: fixed; right: 22px; bottom: 22px; z-index: 20; width: 42px; height: 42px; display: grid; place-items: center; color: var(--text); background: rgba(13, 29, 50, .95); border: 1px solid var(--border); border-radius: 50%; box-shadow: 0 10px 26px rgba(0, 0, 0, .24); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .18s ease, visibility .18s ease, border-color .18s ease, box-shadow .18s ease, text-shadow .18s ease; }
         .goTop.visible { opacity: 1; visibility: visible; pointer-events: auto; }
         .goTop:hover { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 18px rgba(103, 214, 186, .2); text-shadow: 0 0 9px rgba(103, 214, 186, .7); }
         @media (max-width: 500px) { .goTop { right: 16px; bottom: 16px; } }    </style>
 </head>
 <body>
-<div id="root"></div>
+<div id="root"><p class="cdn-fallback" role="status">Loading this demo requires React, ReactDOM, and Babel from unpkg. Check your connection if the page does not appear.</p></div>
 <script type="text/babel">
     const connectLinks = [
         ["Portfolio", "https://www.ashishranjan.net/", String.fromCharCode(0x25c9)],

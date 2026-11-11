@@ -17,7 +17,7 @@ A small React presentation that runs from one HTML file. React, ReactDOM, and Ba
 
 ## Run locally
 
-Open `index.html` directly in a browser or use any static local server.
+Open `index.html` directly in a browser or use any static local server. The page needs an internet connection to load React, ReactDOM, and Babel from unpkg.
 
 ## Deployment
 
